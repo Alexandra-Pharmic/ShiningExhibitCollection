@@ -22,3 +22,8 @@ OverclockedCircuitry:
  Description: |-
     Adds {BaseMana} to the mana base.
     Whenever {PlayerName} enters |Burst|, gain an additional {Mana}.
+
+KnifeTsukumogami:
+ Name: Knife Tsukumogami
+ Description: |-
+    Adds {BaseMana} to the mana base.\n\|Throwing Knives| cost {Mana} less and deal 4 more damage.
