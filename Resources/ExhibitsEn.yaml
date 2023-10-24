@@ -1,0 +1,24 @@
+﻿YoukaiHuntingNeedles:
+ Name: Youkai Hunting Needles
+ Description: |-
+    Adds {BaseMana} to the mana base.
+    At the beginning of each |Boss| and |Elite|, combat, {PlayerName} gains {Value1} |Firepower|. Otherwise, {PlayerName} gains |Firepower| equal to the number of enemies.
+
+LastResortTalisman:
+ Name: Last Resort Talisman
+ Description: |-
+    Adds {BaseMana} to the mana base.
+    Cards produced by card effects cost 1 random mana less.
+
+
+ImprovedMixture:
+ Name: Improved Mixture
+ Description: |-
+    Adds {BaseMana} to the mana base.
+    Whenever an |Unstable Potion| is added to the deck or discard pile, |Upgrade| it.
+
+OverclockedCircuitry:
+ Name: Overclocked Circuitry
+ Description: |-
+    Adds {BaseMana} to the mana base.
+    Whenever {PlayerName} enters |Burst|, gain an additional {Mana}.
