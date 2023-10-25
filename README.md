@@ -6,4 +6,7 @@ Inspired by this: https://discord.com/channels/1040229874176098344/1041404940431
 * The Burst Exhibit provides mana instead of changing how much mana Burst itself provides. This probably doesn't matter for anything.
 * The Marisa exhibits can only be obtained if you have the matching Marisa exhibit of the *same* color. TODO: Also allow it if you have the "wrong" Marisa exhibit, but access to the "correct" color through other means.
 * TODO: Find out why Knife Tsukumogami's description shows up as "Error".
-* Balance changes: The ones that make tokens cheaper could be limited to once per turn if they're too good as-is.
+* TODO: Find out why Sharpened Icicle doesn't apply Cold.
+* TODO: Implement Three Fairies' Flag properly.
+* Potential balance changes: The ones that make tokens cheaper could be limited to once per turn if they're too good as-is.
+
