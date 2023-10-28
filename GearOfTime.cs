@@ -36,14 +36,15 @@ using LBoL.EntityLib.Exhibits;
 using JetBrains.Annotations;
 using LBoL.Core.Stations;
 using LBoL.EntityLib.Exhibits.Shining;
+using LBoL.EntityLib.Cards.Character.Marisa;
 
 namespace ShiningExhibitCollection
 {
-    public sealed class LastResortTalismanDef : ExhibitTemplate
+    public sealed class GearOfTimeDef : ExhibitTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(LastResortTalisman);
+            return nameof(GearOfTime);
         }
         public override LocalizationOption LoadLocalization()
         {
@@ -77,9 +78,9 @@ namespace ShiningExhibitCollection
                 Value1: null,
                 Value2: null,
                 Value3: null,
-                Mana: null,
+                Mana: new ManaGroup() { Blue = 3 },
                 BaseManaRequirement: null,
-                BaseManaColor: ManaColor.White,
+                BaseManaColor: ManaColor.Blue,
                 BaseManaAmount: 1,
                 HasCounter: false,
                 InitialCounter: null,
@@ -89,50 +90,31 @@ namespace ShiningExhibitCollection
             );
             return exhibitConfig;
         }
-        [EntityLogic(typeof(LastResortTalismanDef))]
+        [EntityLogic(typeof(GearOfTimeDef))]
         [UsedImplicitly]
-        [ExhibitInfo(WeighterType = typeof(LastResortTalismanWeighter))]
-        public sealed class LastResortTalisman : ShiningExhibit
+        [ExhibitInfo(WeighterType = typeof(GearOfTimeWeighter))]
+        public sealed class GearOfTime : ShiningExhibit
         {
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToDiscard, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToExile, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
-                base.ReactBattleEvent<CardsAddingToDrawZoneEventArgs>(base.Battle.CardsAddedToDrawZone, new EventSequencedReactor<CardsAddingToDrawZoneEventArgs>(this.OnCardsAddedToDrawZone));
+                base.ReactBattleEvent(Battle.Player.TurnStarting, new EventSequencedReactor<UnitEventArgs>(OnPlayerTurnStarting));
             }
-            private IEnumerable<BattleAction> OnAddCard(CardsEventArgs args)
+            private IEnumerable<BattleAction> OnPlayerTurnStarting(UnitEventArgs args)
             {
-                NotifyActivating();
-                yield return this.RemoveRandomMana(args.Cards);
+
+                if (base.Battle.Player.IsExtraTurn)
+                {
+                    NotifyActivating();
+                    yield return new GainManaAction(this.Mana);
+                }
                 yield break;
             }
 
-            private IEnumerable<BattleAction> OnCardsAddedToDrawZone(CardsAddingToDrawZoneEventArgs args)
-            {
-                NotifyActivating();
-                yield return this.RemoveRandomMana(args.Cards);
-                yield break;
-            }
-
-            private BattleAction RemoveRandomMana(IEnumerable<Card> cards)
-            {
-                    foreach (Card card in cards)
-                    {
-                        if (!(card.Cost == ManaGroup.Empty))
-                        {
-                            ManaColor[] components = card.Cost.EnumerateComponents().SampleManyOrAll(1, base.GameRun.BattleRng);
-                            card.DecreaseBaseCost(ManaGroup.FromComponents(components));
-                        }
-                    }
-                return null;
-            }
-
-            private class LastResortTalismanWeighter : IExhibitWeighter
+            private class GearOfTimeWeighter : IExhibitWeighter
             {
                 public float WeightFor(Type type, GameRunController gameRun)
                 {
-                    if (gameRun.Player.HasExhibit<ReimuR>() || gameRun.Player.HasExhibit<ReimuW>())
+                    if (gameRun.Player.HasExhibit<SakuyaW>() || gameRun.Player.HasExhibit<SakuyaU>())
                     {
                         return 1f;
                     }

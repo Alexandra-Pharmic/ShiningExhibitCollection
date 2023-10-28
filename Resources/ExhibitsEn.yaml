@@ -26,4 +26,21 @@ OverclockedCircuitry:
 KnifeTsukumogami:
  Name: Knife Tsukumogami
  Description: |-
-    Adds {BaseMana} to the mana base.\n\|Throwing Knives| cost {Mana} less and deal 4 more damage.
+    Adds {BaseMana} to the mana base. |Throwing Knives| cost {Mana} less and deal 4 more damage.
+
+GearOfTime:
+ Name: Gear of Time
+ Description: |-
+    Adds {BaseMana} to the mana base.
+    Whenever {PlayerName} starts an extra turn, gain {Mana}.
+
+SharpenedIcicle:
+ Name: Sharpened Icicle
+ Description: |-
+    Adds {BaseMana} to the mana base.
+    When {PlayerName} deals attack damage for the first time each turn, apply |Cold| to the target(s).
+ 
+ThreeFairiesFlag:
+ Name: Three Fairies' Flag
+ Description: |-
+    Adds {BaseMana} to the mana base. |Teammates| gain {Value1} |Loyalty| when summoned.

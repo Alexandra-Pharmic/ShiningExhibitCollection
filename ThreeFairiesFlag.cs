@@ -36,14 +36,15 @@ using LBoL.EntityLib.Exhibits;
 using JetBrains.Annotations;
 using LBoL.Core.Stations;
 using LBoL.EntityLib.Exhibits.Shining;
+using LBoL.EntityLib.Cards.Character.Marisa;
 
 namespace ShiningExhibitCollection
 {
-    public sealed class LastResortTalismanDef : ExhibitTemplate
+    public sealed class ThreeFairiesFlagDef : ExhibitTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(LastResortTalisman);
+            return nameof(ThreeFairiesFlag);
         }
         public override LocalizationOption LoadLocalization()
         {
@@ -66,7 +67,7 @@ namespace ShiningExhibitCollection
                 Index: 0,
                 Id: "",
                 Order: 10,
-                IsDebug: false,
+                IsDebug: true,
                 IsPooled: false,
                 IsSentinel: false,
                 Revealable: false,
@@ -74,12 +75,12 @@ namespace ShiningExhibitCollection
                 Owner: "",
                 LosableType: ExhibitLosableType.CantLose,
                 Rarity: Rarity.Shining,
-                Value1: null,
+                Value1: 1,
                 Value2: null,
                 Value3: null,
                 Mana: null,
                 BaseManaRequirement: null,
-                BaseManaColor: ManaColor.White,
+                BaseManaColor: ManaColor.Green,
                 BaseManaAmount: 1,
                 HasCounter: false,
                 InitialCounter: null,
@@ -89,10 +90,10 @@ namespace ShiningExhibitCollection
             );
             return exhibitConfig;
         }
-        [EntityLogic(typeof(LastResortTalismanDef))]
+        [EntityLogic(typeof(ThreeFairiesFlagDef))]
         [UsedImplicitly]
-        [ExhibitInfo(WeighterType = typeof(LastResortTalismanWeighter))]
-        public sealed class LastResortTalisman : ShiningExhibit
+        [ExhibitInfo(WeighterType = typeof(ThreeFairiesFlagWeighter))]
+        public sealed class ThreeFairiesFlag : ShiningExhibit
         {
             protected override void OnEnterBattle()
             {
@@ -104,35 +105,34 @@ namespace ShiningExhibitCollection
             private IEnumerable<BattleAction> OnAddCard(CardsEventArgs args)
             {
                 NotifyActivating();
-                yield return this.RemoveRandomMana(args.Cards);
+                yield return this.ImproveFriends(args.Cards);
                 yield break;
             }
 
             private IEnumerable<BattleAction> OnCardsAddedToDrawZone(CardsAddingToDrawZoneEventArgs args)
             {
                 NotifyActivating();
-                yield return this.RemoveRandomMana(args.Cards);
+                yield return this.ImproveFriends(args.Cards);
                 yield break;
             }
 
-            private BattleAction RemoveRandomMana(IEnumerable<Card> cards)
+            private BattleAction ImproveFriends(IEnumerable<Card> cards)
             {
-                    foreach (Card card in cards)
+                foreach (Card card in cards)
+                {
+                    if (card.CardType is CardType.Friend)
                     {
-                        if (!(card.Cost == ManaGroup.Empty))
-                        {
-                            ManaColor[] components = card.Cost.EnumerateComponents().SampleManyOrAll(1, base.GameRun.BattleRng);
-                            card.DecreaseBaseCost(ManaGroup.FromComponents(components));
-                        }
+                        card.Loyalty = card.Loyalty + Value1;
                     }
+                }
                 return null;
             }
 
-            private class LastResortTalismanWeighter : IExhibitWeighter
+            private class ThreeFairiesFlagWeighter : IExhibitWeighter
             {
                 public float WeightFor(Type type, GameRunController gameRun)
                 {
-                    if (gameRun.Player.HasExhibit<ReimuR>() || gameRun.Player.HasExhibit<ReimuW>())
+                    if (gameRun.Player.HasExhibit<CirnoG>())
                     {
                         return 1f;
                     }
