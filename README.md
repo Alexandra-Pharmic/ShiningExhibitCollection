@@ -31,7 +31,7 @@ Inspired by this: https://discord.com/channels/1040229874176098344/1041404940431
 
 ### Knife Tsukogami
 * I added damage to the knives because this would otherwise be strictly worse than Last Resort Talisman.
-* I didn't go with Xeno's "knives always deal damage as though they were played" alternative because I felt that it might be too good, and that it would be interesting to encourage
+* I didn't go with Xeno's "knives always deal damage as though they were played" alternative because I felt that it might be too good, and that it would be interesting to occasionally encourage players to play the knives.
 * TODO: Find out why Knife Tsukumogami's description shows up as "Error".
 
 ### Gear of Time
