@@ -75,7 +75,7 @@ namespace ShiningExhibitCollection
                 Owner: "",
                 LosableType: ExhibitLosableType.CantLose,
                 Rarity: Rarity.Shining,
-                Value1: null,
+                Value1: 1,
                 Value2: null,
                 Value3: null,
                 Mana: null,
@@ -148,17 +148,13 @@ namespace ShiningExhibitCollection
                             {
                                 base.NotifyActivating();
                                 base.Counter = 1;
-                                activated = true;
-
-                                //Why doesn't this do anything? The NotifyActivating() does trigger, so why doesn't this?
-                                new ApplyStatusEffectAction<Firepower>(base.Owner, new int?(base.Value1), null, null, null, 0f, true);
-                                yield return new ApplyStatusEffectAction<LBoL.EntityLib.StatusEffects.Cirno.Cold>(unit2, new int?(1), new int?(base.Value1), null, null, 0f, true);
+                                yield return new ApplyStatusEffectAction<LBoL.EntityLib.StatusEffects.Cirno.Cold>(unit2, 0, 0, 0, 0, 0f, true);
                             }
-                            //yield return new ApplyStatusEffectAction<Vulnerable>(unit2, new int?(1), new int?(base.Value1), null, null, 0f, true);
 
                         }
                     }
                 }
+                activated = true;
                 IEnumerator<KeyValuePair<Unit, IReadOnlyList<DamageEventArgs>>> enumerator = null;
                 yield break;
             }
