@@ -39,6 +39,7 @@ Effect: Throwing Knives cost 1 mana less and deal 4 damage more.
 
 * I added damage to the knives because this would otherwise be strictly worse than Last Resort Talisman.
 * I didn't go with Xeno's "knives always deal damage as though they were played" alternative because I felt that it might be too good, and that it would be interesting to occasionally encourage players to play the knives.
+* TODO: Figure out why the description returns an error.
 
 ### Gear of Time
 Effect: Whenever you start an extra turn, gain UUU.
